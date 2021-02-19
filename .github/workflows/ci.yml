@@ -6,8 +6,8 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Install Packages
-      run: npm install
+      run: /usr/bin/npm install
     - name: Build app
-      run: npm run build
+      run: /usr/bin/npm run build
     - name: Launch
       run: cp -r build/* /var/www/html/
