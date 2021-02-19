@@ -1,0 +1,13 @@
+name: Deploy win95react
+on: [push]
+jobs:
+  deploy:
+    runs-on: self-hosted
+    steps:
+    - uses: actions/checkout@v2
+    - name: Install Packages
+      run: npm install
+    - name: Build app
+      run: npm run build
+    - name: Launch
+      run: cp -r build/* /var/www/html/
