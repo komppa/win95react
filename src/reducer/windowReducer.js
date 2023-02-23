@@ -31,7 +31,6 @@ export const windowReducer = (state = [], action) => {
             const x = action.data.x ? action.data.x : (state.length + 1) * 40
             const y = action.data.y ? action.data.y : (state.length + 1) * 30
             const z = state.length + 1  // Z-index increment. The most recently created has highest z-index
-            console.log("@ CREATE_WINDOW", action.data.title, z)
 
             return [
                 ...state, 
@@ -110,6 +109,15 @@ export const moveWindow = (window_id, x_pos, y_pos) => {
 export const bringWindowFront = (window_id) => {
     return {
         type: 'BRING_WINDOW',
+        data: {
+            id: window_id
+        }
+    }
+}
+
+export const destroyWindow = (window_id) => {
+    return {
+        type: 'DESTROY_WINDOW',
         data: {
             id: window_id
         }

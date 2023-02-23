@@ -24,14 +24,17 @@ const store = createStore(
 
 const testWindows = [
     {
+        id: 1,
         title: 'First window',
         content: 'This is first window\'s text',
     },
     {
+        id: 2,
         title: 'Second window',
         content: 'Second window\'s content',
     },
     {
+        id: 3,
         title: 'Third window',
         content: 'Third window\'s content',
     }

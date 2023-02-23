@@ -7,7 +7,11 @@ import Window from './assets/Window'
 import { TaskbarContainer } from './design/TaskbarContainer'
 import StartMenuButton from './design/StartMenuButton'
 import Task from './design/Task'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
+import StartMenu from './design/StartMenu'
+
+// Reducers
+import { toggleStartMenu } from './reducer/startMenuReducer'
 
 // Images
 const github = require('./images/icons/gh.png');
@@ -16,7 +20,8 @@ const github = require('./images/icons/gh.png');
 const W95 = () => {
 
     const windows = useSelector(state => state.windowReducer)
-    // const startMenuOpen = useSelector(state => state.startMenuReducer)
+    const startMenuOpen = useSelector(state => state.startMenuReducer)
+    const dispatch = useDispatch()
 
     return (
         <div style={{backgroundColor: "#008080", height: "100%", width: "100%", position: "absolute", overflow: "hidden"}}>
@@ -32,15 +37,7 @@ const W95 = () => {
 
                 {
                     windows.map(window => 
-                        <Window
-                            id={window.id}
-                             title={window.title}
-                            x={window.y}
-                            y={window.x}
-                            z={window.z}
-                        >
-                            {window.content}
-                        </Window>
+                        <Window {...window} />
                     )
                 }
 
@@ -51,9 +48,11 @@ const W95 = () => {
 
                 <StartMenuButton 
                     onMouseDown={() => null}
-                    onMouseUp={() => null}
-                    pressed={false}
+                    onMouseUp={() => dispatch(toggleStartMenu())}
+                    pressed={startMenuOpen}
                 />
+
+                <StartMenu open={startMenuOpen} />
 
                 <Task
                     onMouseDown={() => null}
@@ -63,7 +62,7 @@ const W95 = () => {
                     text="GitHub" 
                 />
 
-            </TaskbarContainer>   
+            </TaskbarContainer>
 
         </div>  
     )
